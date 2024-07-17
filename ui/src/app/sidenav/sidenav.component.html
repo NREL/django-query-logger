@@ -1,0 +1,7 @@
+<div class="title">
+  <span>Query Inspector</span>
+  <button mat-icon-button aria-label="Close" (click)="close()">
+    <mat-icon fontIcon="chevron_right" />
+  </button>
+</div>
+<pre><code [highlight]="formattedQuery" language="pgsql"></code></pre>

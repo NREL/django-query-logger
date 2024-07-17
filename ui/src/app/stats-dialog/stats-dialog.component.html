@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Query Statistics</h2>
+<mat-dialog-content class="card-container">
+  @if (stats) {
+    <div *ngFor="let stat of stats | keyvalue">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{ stat.key | uppercase }}</mat-card-title>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <table>
+            <tr *ngFor="let count of stat.value | keyvalue : sortTables">
+              <td>{{ count.key }}</td>
+              <td>{{ count.value | number }}</td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  } @else {
+    <mat-progress-bar mode="buffer" [value]="statsProgress" class="progress-bar"></mat-progress-bar>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,86 @@
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <table mat-table recycleRows [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="desc" matSortDisableClear [trackBy]="trackById">
+      <ng-container matColumnDef="filter">
+        <th mat-header-cell *matHeaderCellDef colspan="5">
+          <div class="filter">
+            <button mat-icon-button (click)="toggleFilterInclusivity()">
+              <mat-icon [fontIcon]="filterInclusivity ? 'add_circle' : 'do_not_disturb_on'"/>
+            </button>
+            <mat-form-field appearance="outline" class="filter-input">
+              <mat-label>Filter queries ({{ filterInclusivity ? 'inclusive' : 'exclusive' }})</mat-label>
+              <mat-chip-grid #chipGrid>
+                @for (filter of filters; track filter) {
+                  <mat-chip-row
+                    (removed)="removeFilter(filter)"
+                    [editable]="true"
+                    (edited)="editFilter(filter, $event)">
+                    {{ filter }}
+                    <button matChipRemove>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                }
+                <input placeholder="New filter..."
+                       [matChipInputFor]="chipGrid"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="true"
+                       (matChipInputTokenEnd)="addFilter($event)"/>
+              </mat-chip-grid>
+            </mat-form-field>
+          </div>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let query">{{ query.id | number }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+        <td mat-cell *matCellDef="let query">{{ query.timestamp | timestamp }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
+        <td mat-cell *matCellDef="let query">{{ query.duration }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sql">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>SQL</th>
+        <td mat-cell *matCellDef="let query" colspan="2" [highlight]="query.sql" language="pgsql"></td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="actions">
+            <button mat-stroked-button (click)="stats()">Stats</button>
+            <button mat-stroked-button (click)="download()">Download</button>
+            <button mat-stroked-button color="warn" (click)="clear()">Clear</button>
+          </div>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="elapsedTime">
+        <td mat-footer-cell *matFooterCellDef colspan="3">
+          Elapsed Time: {{ elapsedTime | elapsed }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pagination">
+        <td mat-footer-cell *matFooterCellDef colspan="2">
+          <mat-paginator [pageSizeOptions]="[20, 50, 100]" pageSize="20" showFirstLastButtons></mat-paginator>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns.concat('actions'); sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="['filter']; sticky: true"></tr>
+      <tr mat-row *matRowDef="let query; columns: displayedColumns;" (click)="showSql(query)"></tr>
+      <tr mat-footer-row *matFooterRowDef="['elapsedTime', 'pagination']; sticky: true"></tr>
+    </table>
+  </mat-sidenav-content>
+  <mat-sidenav class="sidenav" fixedInViewport mode="side" position="end" [(opened)]="sidenavOpened">
+    <app-sidenav [query]="selectedQuery" (closeEvent)="sidenavOpened = false"></app-sidenav>
+  </mat-sidenav>
+</mat-sidenav-container>

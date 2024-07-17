@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  align-items: center;
+  background-color: var(--mat-sidenav-container-background-color);
+  border-bottom-color: var(--mat-table-row-item-outline-color, rgba(0, 0, 0, 0.12));
+  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
+  border-bottom-style: solid;
+  display: flex;
+  font-weight: 500;
+  height: 40px;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+}
+
+pre {
+  margin: 0;
+  padding: 16px;
+  white-space: pre-wrap;
+
+  code {
+    font-family: 'JetBrains Mono Variable', monospace;
+    padding: 0;
+  }
+}

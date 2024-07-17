@@ -1,0 +1,48 @@
+@use '@angular/material' as mat;
+@use './app/sidenav/sidenav.component-theme' as sidenav;
+@import '@fontsource-variable/jetbrains-mono';
+//@import 'highlight.js/styles/stackoverflow-dark';
+@import 'highlight.js/styles/agate';
+
+$theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$cyan-palette,
+  ),
+  typography: (
+    plain-family: 'Inter',
+    brand-family: 'Inter',
+  ),
+  density: (
+    scale: -4
+  )
+));
+
+html, body {
+  box-sizing: border-box;
+  height: 100%;
+  @include mat.all-component-themes($theme);
+  @include sidenav.background($theme);
+
+  // Remove sidenav border radius
+  --mat-sidenav-container-shape: 0;
+  --mat-sidenav-container-divider-color: var(--mat-table-row-item-outline-color);
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Inter, "Helvetica Neue", sans-serif;
+  margin: 0;
+  overflow: hidden scroll;
+}
+
+mat-sidenav-container, mat-sidenav-content {
+  overflow: initial !important;
+}
+
+.cdk-global-scrollblock {
+  overflow-y: hidden;
+}

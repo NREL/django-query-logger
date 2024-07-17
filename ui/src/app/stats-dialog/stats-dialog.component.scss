@@ -1,0 +1,23 @@
+.progress-bar {
+  width: 400px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow-x: auto;
+}
+
+.card {
+  background-color: #333;
+  width: fit-content;
+
+  td:first-child {
+    padding-right: 10px;
+  }
+
+  td:last-child {
+    text-align: right;
+  }
+}

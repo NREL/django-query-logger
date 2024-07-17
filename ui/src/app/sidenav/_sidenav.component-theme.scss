@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin background($theme) {
+  app-sidenav code.hljs {
+    background: mat.get-theme-color($theme, surface);
+  }
+}

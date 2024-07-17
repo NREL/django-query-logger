@@ -1,0 +1,45 @@
+table {
+  height: 100vh;
+
+  .mat-column-id {
+    width: 80px;
+  }
+
+  .mat-column-timestamp {
+    width: 164px;
+  }
+
+  .mat-column-duration {
+    width: 110px;
+  }
+
+  .mat-column-clear {
+    width: 100px;
+  }
+
+  tr.mat-mdc-footer-row td {
+    border-top: 1px solid var(--mat-table-row-item-outline-color);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.sidenav {
+  width: 800px;
+}
+
+.filter {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  height: 64px;
+}
+
+.filter-input {
+  margin: 8px 0;
+  width: 100%;
+}
