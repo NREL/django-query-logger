@@ -12,8 +12,6 @@ Install the dependencies and compile the interface
 
 ```
 bun install
-cd ui
-bun install
 bun run build
 ```
 
