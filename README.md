@@ -8,7 +8,7 @@ This tool allows you to stream the queries that are being executed in realtime f
 
 Install [Bun](https://bun.sh/)
 
-Install the dependencies and compile the interface
+Install the dependencies and compile the interface:
 
 ```
 bun install
